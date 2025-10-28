@@ -1,0 +1,113 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background: #00000086;
+  padding: 20px;
+}
+
+.calculator {
+  background: #000;
+  border-radius: 40px;
+  overflow: hidden;
+  max-width: 400px;
+  width: 100%;
+  padding: 30px;
+}
+
+.display-container {
+  padding: 40px 20px;
+  min-height: 180px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+#display {
+  width: 100%;
+  border: none;
+  background: transparent;
+  color: white;
+  font-size: 4em;
+  text-align: right;
+  font-weight: 300;
+  letter-spacing: -2px;
+}
+
+.scientific-row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.buttons {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+}
+
+button {
+  border: none;
+  border-radius: 50%;
+  aspect-ratio: 1;
+  font-size: 1.8em;
+  font-family: 'Roboto', sans-serif;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-weight: 400;
+  background: #333;
+  color: white;
+}
+
+button:hover {
+  filter: brightness(1.2);
+}
+
+button:active {
+  filter: brightness(0.8);
+}
+
+.scientific-row button {
+  background: #1c1c1c;
+  color: #ff9f0a;
+  font-size: 1.2em;
+}
+
+button.function {
+  background: #505050;
+  color: white;
+}
+
+button.operator {
+  background: #ff9f0a;
+  color: white;
+}
+
+button.zero {
+  border-radius: 50px;
+  grid-column: span 2;
+  aspect-ratio: auto;
+}
+
+@media (max-width: 500px) {
+  #display {
+    font-size: 3em;
+  }
+
+  button {
+    font-size: 1.5em;
+  }
+
+  .scientific-row button {
+    font-size: 1em;
+  }
+}
