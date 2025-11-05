@@ -76,7 +76,9 @@ button:active {
   filter: brightness(0.8);
 }
 
-.scientific-row button {
+.scientific-row button,
+[data-value="root"],
+[data-value="^"] {
   background: #1c1c1c;
   color: #ff9f0a;
   font-size: 1.2em;

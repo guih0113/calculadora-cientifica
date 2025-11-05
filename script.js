@@ -36,7 +36,7 @@ function isOperator(value) {
 }
 
 function isScientificOperator(value) {
-  return ['sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'e^x', 'ln', 'sqrt'].includes(value);
+  return ['sin', 'cos', 'tan', 'cot', 'sec', 'csc', 'e^x', 'ln', 'root'].includes(value);
 }
 
 function toggleSign() {
@@ -61,6 +61,12 @@ function applyPercentage() {
 
 function handleScientific(value) {
   try {
+    if (value === 'root') {
+      expression += 'root';
+      updateDisplay();
+      return;
+    }
+
     const lastNumberMatch = expression.match(/(\d+\.?\d*|\d*\.?\d+)$/);
     if (lastNumberMatch) {
       const lastNumber = lastNumberMatch[0];
@@ -92,9 +98,6 @@ function handleScientific(value) {
         case 'ln':
           result = Math.log(operand);
           break;
-        case 'sqrt':
-          result = Math.sqrt(operand);
-          break;
       }
       expression = expression.slice(0, -lastNumber.length) + result.toString();
       updateDisplay();
@@ -107,7 +110,19 @@ function handleScientific(value) {
 
 function calculateResult() {
   try {
-    const evalExpression = expression.replace(/\^/g, '**');
+    let evalExpression = expression;
+    if (evalExpression.includes('root')) {
+      const parts = evalExpression.split('root');
+      const index = parseFloat(parts[0]);
+      const radicand = parseFloat(parts[1]);
+      if (!isNaN(index) && !isNaN(radicand)) {
+        evalExpression = Math.pow(radicand, 1 / index).toString();
+      } else {
+        throw new Error('Invalid root expression');
+      }
+    }
+
+    evalExpression = evalExpression.replace(/\^/g, '**');
     const result = eval(evalExpression);
     expression = result.toString();
     lastResult = result;
